@@ -32,10 +32,15 @@
                     <ul class="navbar-nav d-flex flex-row">
                         @auth
                             <li class="nav-item mx-2">
-                                <a class="btn btn-primary" href="{! route('add-link') !}">Add Link</a>
+                                <a class="btn btn-primary" href="{{ route('shortlink.create') }}">Add Link</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <input class="btn btn-primary" type="submit" value="Logout">
+
+                                </form>
+
                             </li>
                         @else
                             <li class="nav-item mx-2">
