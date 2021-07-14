@@ -21,9 +21,9 @@ Route::get('/', function () {
 
 Route::get('/goto/{id}', [ShortlinkController::class, 'redirect'])->name('shortlink.redirect');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => 'verified'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/my-shortlinks', [ShortlinkController::class, 'index'])->name('shortlink.index');
     Route::get('/shortlink/create', [ShortlinkController::class, 'create'])->name('shortlink.create');

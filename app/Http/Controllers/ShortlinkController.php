@@ -44,7 +44,7 @@ class ShortlinkController extends Controller
 
         $this->authorize('create', Shortlink::class);
 
-        $totalToday = Shortlink::whereDate('created_at', Carbon::today())->withTrashed()->count();
+        $totalToday = Shortlink::whereDate('created_at', Carbon::today())->where('user_id', auth()->user()->id)->withTrashed()->count();
 
         if ($totalToday >= 5) {
             $max_limit = 'Todays max limit reached, top up account or try again tomorrow';

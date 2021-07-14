@@ -17,7 +17,7 @@ require('laravel-mix-polyfill');
 // @ts-ignore
 mix.js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css/')
-/* .polyfill({
+.polyfill({
         enabled: false,
         useBuiltIns: "usage",
         targets:  [
@@ -29,7 +29,7 @@ mix.js('resources/js/app.js', 'public/js')
         debug: true,
         entryPoints: "stable",
 
-     }) */
+     })
   .options({
     processCssUrls: false,
     autoprefixer: {
