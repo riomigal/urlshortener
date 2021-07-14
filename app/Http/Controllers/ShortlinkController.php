@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shortlink;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ShortlinkController extends Controller
 {
@@ -42,6 +43,14 @@ class ShortlinkController extends Controller
     {
 
         $this->authorize('create', Shortlink::class);
+
+        $totalToday = Shortlink::whereDate('created_at', Carbon::today())->withTrashed()->count();
+
+        if ($totalToday >= 5) {
+            $max_limit = 'Todays max limit reached, top up account or try again tomorrow';
+            return view('shortlink.index', compact('max_limit'));
+        }
+
         $request->validate([
             'url' => 'required|active_url'
         ]);
@@ -152,6 +161,7 @@ class ShortlinkController extends Controller
 
 
         $shortlink = Shortlink::where('id', $id)->first();
-        return redirect()->to($shortlink->url);
+        if ($shortlink)    return redirect()->to($shortlink->url);
+        abort(404);
     }
 }

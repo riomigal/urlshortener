@@ -7,6 +7,9 @@
                 <div class="card">
                     <h1 class="card-header">{{ __('Shortlinks') }}</h1>
 
+                    @if (isset($max_limit))
+                        <p class="text-danger">{{ $max_limit }}</p>
+                    @endif
                     <div class="card-body">
 
 
@@ -25,18 +28,18 @@
                         @if ($shortlinks->count() > 0)
 
                             <h2>Active Shortlink</h2>
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Url</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     @foreach ($shortlinks as $shortlink)
-                                        <tr>
+                                        <tr class="d-flex flex-wrap border">
                                             <td><button class="btn btn-primary clipboard"
                                                     data-mdb-clipboard-target="#copy-link-{{ $shortlink->id }}">
                                                     Copy Url
@@ -93,20 +96,21 @@
                         @endif
 
                         <h2 class="mt-5">Disabled Shortlinks</h2>
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Shortlink</th>
-                                    <th>Url</th>
+                                    <th></th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach ($shortlinksTrashed as $shortlink)
-                                    <tr>
-                                        <td>{{ $shortlink->id }} </td>
-                                        <td>{{ $shortlink->url }} </td>
+                                    <tr class="d-flex">
+
+                                        <td>{{ \Illuminate\Support\Str::limit($shortlink->url, $limit = 30, $end = '...') }}
+                                        </td>
                                         <td>
                                             <form method="POST"
                                                 action="{{ route('shortlink.restore', ['id' => $shortlink->id]) }}">
