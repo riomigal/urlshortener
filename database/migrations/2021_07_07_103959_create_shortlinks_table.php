@@ -18,6 +18,7 @@ class CreateShortlinksTable extends Migration
             $table->string('url');
             $table->foreignId('user_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

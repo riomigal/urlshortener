@@ -16,6 +16,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -33,6 +35,9 @@
                         @auth
                             <li class="nav-item mx-2">
                                 <a class="btn btn-primary" href="{{ route('shortlink.create') }}">Add Link</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="btn btn-primary" href="{{ route('shortlink.index') }}">My Links</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <form method="POST" action="{{ route('logout') }}">
