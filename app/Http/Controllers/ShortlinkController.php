@@ -112,7 +112,7 @@ class ShortlinkController extends Controller
     public function delete(Shortlink $shortlink)
     {
 
-
+        Shortlink::all();
         $this->authorize('delete', $shortlink);
         $shortlink->delete();
 
